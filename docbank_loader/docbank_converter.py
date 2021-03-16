@@ -15,7 +15,7 @@ random.seed(42)
 np.random.seed(42)
 
 class Bbox:
-    def __init__(self, bbox, structure, pagesize,words):
+    def __init__(self, bbox, structure, pagesize, words):
         self.bbox = bbox
         self.structure = structure
         self.pagesize = pagesize
@@ -39,7 +39,7 @@ class NormalizedBbox:
         x0, y0, x1, y1 = int(x0 * width / 1000), int(y0 * height / 1000), int(x1 * width / 1000), int(
             y1 * height / 1000)
 
-        return Bbox([x0, y0, x1, y1], self.structure, self.words, pagesize)
+        return Bbox([x0, y0, x1, y1], self.structure, pagesize, self.words)
 
 class CVStructure:
     def __init__(self, infos, structure):
