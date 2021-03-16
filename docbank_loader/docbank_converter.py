@@ -38,7 +38,7 @@ class NormalizedBbox:
         x0, y0, x1, y1 = int(x0 * width / 1000), int(y0 * height / 1000), int(x1 * width / 1000), int(
             y1 * height / 1000)
 
-        return Bbox([x0, y0, x1, y1], self.structure, pagesize)
+        return Bbox([x0, y0, x1, y1], self.structure, self.words,pagesize)
 
 class CVStructure:
     def __init__(self, infos, structure):
