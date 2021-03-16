@@ -22,7 +22,7 @@ class Bbox:
         self.words = ' '.join(list(map(str,words)))
     
     def __str__(self):
-        return '\t'.join(list(map(str, self.bbox)) + [self.structure]+self.words)
+        return '\t'.join(list(map(str, self.bbox)) + [self.structure] + [self.words])
 
 class NormalizedBbox:
     def __init__(self, bbox, structure, words):
@@ -31,7 +31,7 @@ class NormalizedBbox:
         self.words = ' '.join(list(map(str,words)))
     
     def __str__(self):
-        return '\t'.join(list(map(str, self.bbox)) + [self.structure]+self.words)
+        return '\t'.join(list(map(str, self.bbox)) + [self.structure]+ [self.words])
 
     def denormalize(self, pagesize):
         width, height = pagesize
