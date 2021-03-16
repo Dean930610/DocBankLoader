@@ -28,7 +28,7 @@ class NormalizedBbox:
     def __init__(self, bbox, structure, words):
         self.bbox = bbox
         self.structure = structure
-        self.words = ''.join(list(map(str,words)))
+        self.words = ' '.join(list(map(str,words)))
     
     def __str__(self):
         return '\t'.join(list(map(str, self.bbox)) + [self.structure]+ [self.words])
