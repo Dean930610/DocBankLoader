@@ -15,16 +15,17 @@ random.seed(42)
 np.random.seed(42)
 
 class Bbox:
-    def __init__(self, bbox, structure, pagesize):
+    def __init__(self, bbox, structure, pagesize,words):
         self.bbox = bbox
         self.structure = structure
         self.pagesize = pagesize
+        self.words = ' '.join(list(map(str,words)))
     
     def __str__(self):
-        return '\t'.join(list(map(str, self.bbox)) + [self.structure])
+        return '\t'.join(list(map(str, self.bbox)) + [self.structure]+self.words)
 
 class NormalizedBbox:
-    def __init__(self, bbox, structure,words):
+    def __init__(self, bbox, structure, words):
         self.bbox = bbox
         self.structure = structure
         self.words = ' '.join(list(map(str,words)))
@@ -38,7 +39,7 @@ class NormalizedBbox:
         x0, y0, x1, y1 = int(x0 * width / 1000), int(y0 * height / 1000), int(x1 * width / 1000), int(
             y1 * height / 1000)
 
-        return Bbox([x0, y0, x1, y1], self.structure, self.words,pagesize)
+        return Bbox([x0, y0, x1, y1], self.structure, self.words, pagesize)
 
 class CVStructure:
     def __init__(self, infos, structure):
@@ -52,7 +53,7 @@ class CVStructure:
         bottoms = [t.bbox[3] for t in self.infos]
         words = [t.word for t in self.infos]
 
-        return NormalizedBbox((min(lefts), min(tops), max(rights), max(bottoms)), self.structure,words)
+        return NormalizedBbox((min(lefts), min(tops), max(rights), max(bottoms)), self.structure, words)
 
     @classmethod
     def from_example(cls, example):
