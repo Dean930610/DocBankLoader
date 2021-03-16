@@ -24,12 +24,13 @@ class Bbox:
         return '\t'.join(list(map(str, self.bbox)) + [self.structure])
 
 class NormalizedBbox:
-    def __init__(self, bbox, structure):
+    def __init__(self, bbox, structure,words):
         self.bbox = bbox
         self.structure = structure
+        self.words = ' '.join(list(map(str,words)))
     
     def __str__(self):
-        return '\t'.join(list(map(str, self.bbox)) + [self.structure])
+        return '\t'.join(list(map(str, self.bbox)) + [self.structure]+self.words)
 
     def denormalize(self, pagesize):
         width, height = pagesize
@@ -49,8 +50,9 @@ class CVStructure:
         tops = [t.bbox[1] for t in self.infos]
         rights = [t.bbox[2] for t in self.infos]
         bottoms = [t.bbox[3] for t in self.infos]
+        words = [t.word for t in self.infos]
 
-        return NormalizedBbox((min(lefts), min(tops), max(rights), max(bottoms)), self.structure)
+        return NormalizedBbox((min(lefts), min(tops), max(rights), max(bottoms)), self.structure,words)
 
     @classmethod
     def from_example(cls, example):
